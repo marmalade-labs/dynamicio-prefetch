@@ -13,6 +13,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     <div className="flex flex-col gap-2">
       <div>{title}</div>
       <NextLink />
+      <NextLink prefetch />
     </div>
   )
 }
@@ -23,11 +24,11 @@ const fetchTitle = cache(async function fetchTitle(slug: string) {
   return `Current Page: ${slug}`
 })
 
-function NextLink() {
+function NextLink({ prefetch = false }: { prefetch?: boolean }) {
   const id = nanoid();
   return (
-    <div>Go to:{" "}
-      <Link href={`/${id}`} prefetch>{id}</Link>
+    <div>{prefetch && "[PREFETCH] "}Go to:{" "}
+      <Link href={`/${id}`} prefetch={prefetch}>{id}</Link>
     </div>
   )
 }
