@@ -24,7 +24,7 @@ const fetchTitle = cache(async function fetchTitle(slug: string) {
   return `Current Page: ${slug}`
 })
 
-function NextLink({ prefetch = false }: { prefetch?: boolean }) {
+function NextLink({ prefetch = null }: { prefetch?: boolean | null }) {
   const id = nanoid();
   return (
     <div>{prefetch && "[PREFETCH] "}Go to:{" "}
